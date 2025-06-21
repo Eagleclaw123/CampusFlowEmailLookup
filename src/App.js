@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import AccountDeletionForm from "./components/DeletionForm";
 import CampusFlowEmailChecker from "./components/EmailChecker";
 
 function App() {
