@@ -105,10 +105,10 @@ const CampusFlowEmailChecker = () => {
       <div className="relative z-10 max-w-md mx-auto px-6 py-12">
         {/* Welcome Message */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-gray-900 mb-3 sm:text-2xl">
             Welcome Back! 👋
           </h2>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 leading-relaxed text-sm sm:text-base px-2">
             Enter your roll number to quickly find your registered email address
             for CampusFlow login
           </p>
@@ -126,21 +126,27 @@ const CampusFlowEmailChecker = () => {
 
           <div className="relative z-10 space-y-6">
             <div className="text-center">
-              <div
-                className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg"
-                style={{ backgroundColor: "#3E4685" }}
-              >
-                <Search className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 sm:text-xl">
                 Find Your Email
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Quick and secure email lookup
+              </p>
+              <p className="text-gray-500 text-xs mt-1 sm:text-xs">
+                Example: 21RS1A0101
               </p>
             </div>
 
             <div className="space-y-5">
+              <div className="text-center mb-4">
+                <div
+                  className="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center shadow-lg sm:w-16 sm:h-16"
+                  style={{ backgroundColor: "#3E4685" }}
+                >
+                  <Search className="w-6 h-6 text-white sm:w-8 sm:h-8" />
+                </div>
+              </div>
+
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-gray-400" />
@@ -150,8 +156,8 @@ const CampusFlowEmailChecker = () => {
                   value={rollNumber}
                   onChange={(e) => setRollNumber(e.target.value.toUpperCase())}
                   onKeyPress={handleKeyPress}
-                  placeholder="Enter Roll Number (e.g., 21RS1A0101)"
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-500 font-medium shadow-sm hover:shadow-md"
+                  placeholder="Roll Number"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-500 font-medium shadow-sm hover:shadow-md text-sm sm:text-base"
                   style={{
                     focusRingColor: "#3E4685",
                     "--tw-ring-color": "#3E4685",
@@ -205,18 +211,18 @@ const CampusFlowEmailChecker = () => {
           <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 p-8 animate-slideUp">
             {result.error ? (
               <div className="text-center">
-                <div className="bg-red-50 p-4 rounded-2xl w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg">
-                  <AlertCircle className="w-10 h-10 text-red-500" />
+                <div className="bg-red-50 p-4 rounded-2xl w-16 h-16 mx-auto mb-6 flex items-center justify-center shadow-lg sm:w-20 sm:h-20">
+                  <AlertCircle className="w-8 h-8 text-red-500 sm:w-10 sm:h-10" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 sm:text-xl">
                   Oops! Not Found
                 </h3>
-                <p className="text-red-600 mb-4 leading-relaxed">
+                <p className="text-red-600 mb-4 leading-relaxed text-sm sm:text-base px-2">
                   {result.error}
                 </p>
                 <button
                   onClick={() => setResult(null)}
-                  className="text-sm font-medium px-6 py-2 rounded-xl transition-all duration-200 hover:shadow-md"
+                  className="text-xs font-medium px-4 py-2 rounded-xl transition-all duration-200 hover:shadow-md sm:text-sm sm:px-6"
                   style={{
                     backgroundColor: "#3E4685",
                     color: "white",
@@ -227,38 +233,38 @@ const CampusFlowEmailChecker = () => {
               </div>
             ) : (
               <div className="text-center">
-                <div className="bg-green-50 p-4 rounded-2xl w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg">
-                  <CheckCircle className="w-10 h-10 text-green-500" />
+                <div className="bg-green-50 p-4 rounded-2xl w-16 h-16 mx-auto mb-6 flex items-center justify-center shadow-lg sm:w-20 sm:h-20">
+                  <CheckCircle className="w-8 h-8 text-green-500 sm:w-10 sm:h-10" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 sm:text-xl">
                   Perfect! Email Found ✨
                 </h3>
 
-                <div className="bg-gradient-to-r from-gray-50 to-indigo-50 rounded-2xl p-6 mb-6 border border-gray-100">
+                <div className="bg-gradient-to-r from-gray-50 to-indigo-50 rounded-2xl p-4 mb-6 border border-gray-100 sm:p-6">
                   <div className="mb-4">
-                    <p className="text-sm font-medium text-gray-600 mb-1">
+                    <p className="text-xs font-medium text-gray-600 mb-1 sm:text-sm">
                       Student Name
                     </p>
-                    <p className="font-bold text-gray-900 text-lg">
+                    <p className="font-bold text-gray-900 text-base sm:text-lg">
                       {result.student.Name}
                     </p>
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-sm font-medium text-gray-600 mb-2">
+                    <p className="text-xs font-medium text-gray-600 mb-2 sm:text-sm">
                       Your Login Email
                     </p>
                     <div
-                      className="bg-white rounded-xl p-4 border-2 shadow-sm"
+                      className="bg-white rounded-xl p-3 border-2 shadow-sm sm:p-4"
                       style={{ borderColor: "#3E4685" }}
                     >
                       <div className="flex items-center justify-center space-x-2">
                         <Mail
-                          className="w-5 h-5"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
                           style={{ color: "#3E4685" }}
                         />
                         <p
-                          className="font-mono font-semibold break-all"
+                          className="font-mono font-semibold break-all text-xs sm:text-sm"
                           style={{ color: "#3E4685" }}
                         >
                           {result.student.Email}
@@ -266,24 +272,47 @@ const CampusFlowEmailChecker = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* Password Note */}
+                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-4 border-2 border-yellow-200 shadow-sm">
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-yellow-100 p-2 rounded-lg flex-shrink-0">
+                        <Mail className="w-4 h-4 text-yellow-600 sm:w-5 sm:h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-yellow-800 text-sm mb-1 sm:text-base">
+                          🔐 Password Information
+                        </h4>
+                        <p className="text-yellow-700 text-xs leading-relaxed sm:text-sm">
+                          Your password has already been sent to your email
+                          address.
+                          <span className="font-semibold">
+                            {" "}
+                            Search "CampusFlow" in your Gmail
+                          </span>{" "}
+                          to find the password email.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-xs">
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
-                    <p className="text-gray-500 mb-1">Branch</p>
-                    <p className="font-semibold text-gray-900">
+                <div className="grid grid-cols-3 gap-2 text-xs sm:gap-3">
+                  <div className="bg-white rounded-xl p-2 shadow-sm border border-gray-100 sm:p-3">
+                    <p className="text-gray-500 mb-1 text-xs">Branch</p>
+                    <p className="font-semibold text-gray-900 text-xs sm:text-sm">
                       {result.student.Branch}
                     </p>
                   </div>
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
-                    <p className="text-gray-500 mb-1">Year</p>
-                    <p className="font-semibold text-gray-900">
+                  <div className="bg-white rounded-xl p-2 shadow-sm border border-gray-100 sm:p-3">
+                    <p className="text-gray-500 mb-1 text-xs">Year</p>
+                    <p className="font-semibold text-gray-900 text-xs sm:text-sm">
                       {result.student.Year}
                     </p>
                   </div>
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
-                    <p className="text-gray-500 mb-1">Semester</p>
-                    <p className="font-semibold text-gray-900">
+                  <div className="bg-white rounded-xl p-2 shadow-sm border border-gray-100 sm:p-3">
+                    <p className="text-gray-500 mb-1 text-xs">Semester</p>
+                    <p className="font-semibold text-gray-900 text-xs sm:text-sm">
                       {result.student.Semester}
                     </p>
                   </div>
@@ -291,7 +320,7 @@ const CampusFlowEmailChecker = () => {
 
                 <button
                   onClick={() => setResult(null)}
-                  className="mt-6 text-sm font-medium px-6 py-2 rounded-xl border-2 transition-all duration-200 hover:shadow-md"
+                  className="mt-6 text-xs font-medium px-4 py-2 rounded-xl border-2 transition-all duration-200 hover:shadow-md sm:text-sm sm:px-6"
                   style={{
                     borderColor: "#3E4685",
                     color: "#3E4685",
