@@ -6,13 +6,16 @@ import {
   GraduationCap,
   AlertCircle,
   CheckCircle,
+  Key,
+  Shield,
 } from "lucide-react";
-import { studentsData } from "../data/students";
+import { studentsData } from "../data/mergedStudentsData";
 
 const CampusFlowEmailChecker = () => {
   const [rollNumber, setRollNumber] = useState("");
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSearch = () => {
     if (!rollNumber.trim()) {
@@ -21,6 +24,7 @@ const CampusFlowEmailChecker = () => {
     }
 
     setIsLoading(true);
+    setShowPassword(false);
 
     // Simulate API call delay
     setTimeout(() => {
@@ -48,6 +52,11 @@ const CampusFlowEmailChecker = () => {
   const clearSearch = () => {
     setRollNumber("");
     setResult(null);
+    setShowPassword(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -94,7 +103,7 @@ const CampusFlowEmailChecker = () => {
                 CampusFlow
               </h1>
               <p className="text-sm font-medium text-gray-600 mt-1">
-                Email Lookup Portal
+                Email & Password Lookup Portal
               </p>
             </div>
           </div>
@@ -110,7 +119,7 @@ const CampusFlowEmailChecker = () => {
           </h2>
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base px-2">
             Enter your roll number to quickly find your registered email address
-            for CampusFlow login
+            and password for CampusFlow login
           </p>
         </div>
 
@@ -127,10 +136,10 @@ const CampusFlowEmailChecker = () => {
           <div className="relative z-10 space-y-6">
             <div className="text-center">
               <h3 className="text-lg font-semibold text-gray-900 mb-2 sm:text-xl">
-                Find Your Email
+                Find Your Login Details
               </h3>
               <p className="text-gray-600 text-xs sm:text-sm">
-                Quick and secure email lookup
+                Quick and secure email & password lookup
               </p>
               <p className="text-gray-500 text-xs mt-1 sm:text-xs">
                 Example: 21RS1A0101
@@ -198,7 +207,7 @@ const CampusFlowEmailChecker = () => {
                 ) : (
                   <>
                     <Search className="w-5 h-5" />
-                    <span>Find My Email</span>
+                    <span>Find My Login Details</span>
                   </>
                 )}
               </button>
@@ -237,7 +246,7 @@ const CampusFlowEmailChecker = () => {
                   <CheckCircle className="w-8 h-8 text-green-500 sm:w-10 sm:h-10" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2 sm:text-xl">
-                  Perfect! Email Found ✨
+                  Perfect! Login Details Found ✨
                 </h3>
 
                 <div className="bg-gradient-to-r from-gray-50 to-indigo-50 rounded-2xl p-4 mb-6 border border-gray-100 sm:p-6">
@@ -273,24 +282,59 @@ const CampusFlowEmailChecker = () => {
                     </div>
                   </div>
 
-                  {/* Password Note */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-4 border-2 border-yellow-200 shadow-sm">
+                  {/* Password Section */}
+                  {result.student.Password && (
+                    <div className="mb-4">
+                      <p className="text-xs font-medium text-gray-600 mb-2 sm:text-sm">
+                        Your Password
+                      </p>
+                      <div
+                        className="bg-white rounded-xl p-3 border-2 shadow-sm sm:p-4"
+                        style={{ borderColor: "#3E4685" }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2 flex-1">
+                            <Key
+                              className="w-4 h-4 sm:w-5 sm:h-5"
+                              style={{ color: "#3E4685" }}
+                            />
+                            <p
+                              className="font-mono font-semibold break-all text-xs sm:text-sm"
+                              style={{ color: "#3E4685" }}
+                            >
+                              {showPassword
+                                ? result.student.Password
+                                : "••••••••••••••••"}
+                            </p>
+                          </div>
+                          <button
+                            onClick={togglePasswordVisibility}
+                            className="ml-2 px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                            style={{ color: "#3E4685" }}
+                          >
+                            {showPassword ? "Hide" : "Show"}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Security Note */}
+                  <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-4 mb-4 border-2 border-orange-200 shadow-sm">
                     <div className="flex items-start space-x-3">
-                      <div className="bg-yellow-100 p-2 rounded-lg flex-shrink-0">
-                        <Mail className="w-4 h-4 text-yellow-600 sm:w-5 sm:h-5" />
+                      <div className="bg-orange-100 p-2 rounded-lg flex-shrink-0">
+                        <Shield className="w-4 h-4 text-orange-600 sm:w-5 sm:h-5" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-yellow-800 text-sm mb-1 sm:text-base">
-                          🔐 Password Information
+                        <h4 className="font-semibold text-orange-800 text-sm mb-1 sm:text-base">
+                          🔒 Important Security Notice
                         </h4>
-                        <p className="text-yellow-700 text-xs leading-relaxed sm:text-sm">
-                          Your password has already been sent to your email
-                          address.
+                        <p className="text-orange-700 text-xs leading-relaxed sm:text-sm">
                           <span className="font-semibold">
-                            {" "}
-                            Search "CampusFlow" in your Gmail
+                            Please change your password immediately after login
                           </span>{" "}
-                          to find the password email.
+                          for security reasons. Use a strong, unique password
+                          that you haven't used elsewhere.
                         </p>
                       </div>
                     </div>
